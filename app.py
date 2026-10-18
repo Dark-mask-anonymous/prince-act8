@@ -148,11 +148,11 @@ def get_classmate_students():
 	if (
 		parsed_url.scheme != "https"
 		or not hostname.endswith(".onrender.com")
-		or parsed_url.path.rstrip("/") != "/api/students"
+		or parsed_url.path.rstrip("/") not in ("/api/students", "/students")
 		or parsed_url.username
 		or parsed_url.password
 	):
-		return jsonify({"error": "Use an HTTPS Render /api/students URL."}), 400
+		return jsonify({"error": "Use an HTTPS Render /api/students or /students URL."}), 400
 
 	try:
 		response = requests.get(classmate_url, timeout=15)
